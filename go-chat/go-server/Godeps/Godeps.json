@@ -1,0 +1,13 @@
+{
+	"ImportPath": "github.com/simonleung8/bluemix-demo/go-chat/go-server",
+	"GoVersion": "go1.5.3",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/fjl/go-couchdb",
+			"Rev": "1f327c218d24c98ba4067e086a2787c1488ba558"
+		}
+	]
+}

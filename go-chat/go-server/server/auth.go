@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 func use(h http.HandlerFunc, middleware ...func(http.HandlerFunc) http.HandlerFunc) http.HandlerFunc {
@@ -42,6 +43,10 @@ func basicAuth(h http.HandlerFunc) http.HandlerFunc {
 			http.Error(w, "Not authorized", 401)
 			return
 		}
+
+		expire := time.Now().Add(5 * time.Minute)
+		cookie := &http.Cookie{Name: "friend-circle-user", Expires: expire, Value: pair[0]}
+		r.AddCookie(cookie)
 
 		h.ServeHTTP(w, r)
 	}

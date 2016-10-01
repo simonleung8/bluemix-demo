@@ -45,6 +45,9 @@
 
     <div class="row" style="text-align:center">
       <div class="col-xs-12" style="text-align:center">
+        <div style="width:80%; padding:5px; text-align:right;">Logged in: {{ .User }}</div>
+      </div>
+      <div class="col-xs-12" style="text-align:center">
         <div style="width:80%; background-color:#ddd; padding:5px; text-align:left;">{{ .Chats }}</div>
       </div>
       <form action="/admin/save_data" method="post">

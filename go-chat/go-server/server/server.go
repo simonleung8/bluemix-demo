@@ -2,7 +2,6 @@ package server
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -10,10 +9,6 @@ import (
 
 	couchdb "github.com/fjl/go-couchdb"
 )
-
-type template_data struct {
-	Chats template.HTML
-}
 
 type messages struct {
 	Rows []msg_data `json:"rows"`

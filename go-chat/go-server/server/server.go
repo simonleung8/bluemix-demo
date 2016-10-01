@@ -33,7 +33,7 @@ func NewServer(db *couchdb.DB) *Server {
 func (s *Server) Start() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		t, err := template.ParseFiles("templates/index.html")
+		t, err := template.ParseFiles("templates/index.tmpl")
 		must(err, "Error parsing template")
 
 		// var result msg_data

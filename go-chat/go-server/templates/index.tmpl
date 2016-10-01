@@ -5,7 +5,7 @@
   <head>
     <title>Bluemix friend's circle</title>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="../web/css/bootstrap.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../web/css/bootstrap-theme.css" type="text/css" media="screen" />
@@ -45,7 +45,7 @@
 
     <div class="row" style="text-align:center">
       <div class="col-xs-12">
-	  <textarea rows="10" cols="150">{{ .Chats }}</textarea>
+        <div style="width:80%; margin:auto; background-color:#ddd; padding:5px; text-align:left;">{{ .Chats }}</div>
       </div>
       <form action="/admin/save_data" method="post">
       <div class="col-xs-12">

@@ -6,18 +6,23 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	couchdb "github.com/fjl/go-couchdb"
 )
+
+type template_data struct {
+	Chats template.HTML
+}
 
 type messages struct {
 	Rows []msg_data `json:"rows"`
 }
 
 type msg_data struct {
-	Time  string `json:"key"`
-	Chats string `json:"value"`
-	Name  string `json:"id"`
+	Time string `json:"key"`
+	Msg  string `json:"value"`
+	Name string `json:"id"`
 }
 
 type Server struct {
@@ -39,11 +44,12 @@ func (s *Server) Start() {
 		// var result msg_data
 		var result messages
 		err = s.db.View("_design/friends-circle", "get-msg", &result, nil)
-		d := msg_data{
-			// Chats: `Testing
-			// hihi
-			// `,
-			Chats: fmt.Sprintf("%#v", result),
+		if err != nil {
+			log.Print("error getting view", err.Error())
+		}
+
+		d := template_data{
+			Chats: template.HTML(build_chat_text(result)),
 		}
 		must(t.Execute(w, d), "Error executing template")
 	})
@@ -59,4 +65,18 @@ func must(err error, msg string) {
 	if err != nil {
 		log.Fatal(msg + ": " + err.Error())
 	}
+}
+
+func build_chat_text(msgs messages) string {
+	var str string
+	for _, r := range msgs.Rows {
+		// chat_time, err := time.Parse("Mon Jan 2 15:04:05 -0700 MST 2006", r.Time)
+		chat_time, err := time.Parse("2006-01-02 15:04 MST", r.Time)
+		if err != nil {
+			log.Println("error parsing time ", err)
+		}
+
+		str = str + fmt.Sprintf("<b>%s</b><span style='font-size:0.7em; color:#aaa;'> (%s) </span>: %s<br>", r.Name, chat_time.Format("Mon 15:04"), r.Msg)
+	}
+	return str
 }

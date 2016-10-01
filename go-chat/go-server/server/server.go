@@ -33,6 +33,7 @@ func NewServer(db *couchdb.DB) *Server {
 func (s *Server) Start() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", use(basicAuth(s.template_handler)))
+	mux.HandleFunc("/logout", s.logout_handler)
 
 	mux.Handle("/web/", http.StripPrefix("/web/", http.FileServer(http.Dir("web"))))
 

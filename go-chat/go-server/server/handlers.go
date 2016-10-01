@@ -33,3 +33,7 @@ func (s *Server) template_handler(w http.ResponseWriter, req *http.Request) {
 	}
 	must(t.Execute(w, d), "Error executing template")
 }
+
+func (s *Server) logout_handler(w http.ResponseWriter, req *http.Request) {
+	http.Redirect(w, req, "/", 401)
+}

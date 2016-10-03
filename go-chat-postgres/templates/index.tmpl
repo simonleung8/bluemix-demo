@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="../web/css/bootstrap.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../web/css/bootstrap-theme.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../web/css/main.css" type="text/css" media="screen" />
     <script type="text/javascript" src="../web/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../web/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../web/js/angular.min.js"></script>
@@ -38,37 +39,31 @@
         </div>
     </div>
 </nav>
-<div class="container">
-    <div class="jumbotron">
-        <h1>Bluemix Cloud App</h1>
+
+<div class="container" style="height:100%">
+    <div class="page-header">
+        <h1>Bluemix Watson service</h1>
     </div>
 
+    <div style="padding:5px; text-align:right;">Logged in: {{ .User }} <a href="/logout" style="font-size:.8em">logout</a></div>
+    <div style="overflow-y:scroll; height:50%; background-color:#ddd; padding:5px; text-align:left;">{{ .Chats }}</div>
+
     <div class="row" style="text-align:center">
-      <div class="col-xs-12" style="text-align:center">
-        <div style="width:80%; padding:5px; text-align:right;">Logged in: {{ .User }} <a href="/logout" style="font-size:.8em">logout</a></div>
-      </div>
-      <div class="col-xs-12" style="text-align:center">
-        <div style="width:80%; background-color:#ddd; padding:5px; text-align:left;">{{ .Chats }}</div>
-      </div>
-      <form action="/admin/save_data" method="post">
-      <div class="col-xs-12">
-	  <textarea rows="1" cols="150"></textarea>
-      </div>
-      <div class="col-xs-12">
-	  <input type="submit" value="send" style="width:50%">
-      </div>
+      <form action="/" method="post">
+	<input style="width:70%" type="text" name="chat_msg">
+	<input type="submit" value="send" style="width:25%">
+	<input type="hidden" value={{ .User }} name="user_name" />
       </form>
     </div>
 
-    <hr>
-    <div class="row">
-        <div class="col-sm-12">
-            <footer>
-                <p> IBM Bluemix </p>
-            </footer>
-        </div>
-    </div>
+      <form enctype="multipart/form-data" action="/upload" method="post">
+        <input type="file" name="photo" />
+        <input type="submit" value="upload" />
+        <input type="hidden" value={{ .User }} name="user_name" />
+      </form>
 </div>
+
+<div class="footer">IBM Bluemix</div>
 </body>
 
 </html>

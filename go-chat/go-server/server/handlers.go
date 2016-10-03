@@ -12,9 +12,29 @@ type template_data struct {
 	User  string
 }
 
+type test_data struct {
+	Chats []test2 `json:"chats"`
+}
+type test2 struct {
+	Chat string `json:"msg"`
+	Time string `json:"time"`
+}
+
 func (s *Server) template_handler(w http.ResponseWriter, req *http.Request) {
 	t, err := template.ParseFiles("templates/index.tmpl")
 	must(err, "Error parsing template")
+
+	dd := test_data{
+		Chats: []test2{
+			test2{
+				Chat: "msg...123",
+				Time: "",
+			},
+		},
+	}
+	aa, ee := s.db.Put("test", dd, "5-baec9522c4f7067d352c6e08c06de838")
+	must(ee, "Error blah blah template")
+	println(aa)
 
 	var result messages
 	err = s.db.View("_design/friends-circle", "get-msg", &result, nil)

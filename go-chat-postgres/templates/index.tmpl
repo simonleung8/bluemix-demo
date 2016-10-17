@@ -46,7 +46,7 @@
     </div>
 
     <div style="padding:5px; text-align:right;">Logged in: {{ .User }} <a href="/logout" style="font-size:.8em">logout</a></div>
-    <div style="overflow-y:scroll; height:50%; background-color:#ddd; padding:5px; text-align:left;">{{ .Chats }}</div>
+    <div id="chatDiv" style="overflow-y:scroll; height:50%; background-color:#ddd; padding:5px; text-align:left;">{{ .Chats }}</div>
 
     <div class="row" style="text-align:center">
       <form action="/" method="post">
@@ -65,5 +65,12 @@
 
 <div class="footer">IBM Bluemix</div>
 </body>
+
+<script type="text/javascript">
+  setInterval(function() {
+    console.log('hi');
+    $("#chatDiv").load("/chats");
+  }, 2000); 
+</script>
 
 </html>

@@ -23,6 +23,7 @@ func (s *Server) Start() {
 
 	mux.HandleFunc("/", use(basicAuth(s.root_handler))) //handles both GET and POST
 	mux.HandleFunc("/upload", s.upload_handler)         //handles POST
+	mux.HandleFunc("/chats", s.get_chats_handler)       //handles GET
 	mux.HandleFunc("/logout", s.logout_handler)
 
 	mux.Handle("/web/", http.StripPrefix("/web/", http.FileServer(http.Dir("web"))))

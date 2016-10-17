@@ -43,7 +43,7 @@
 
 <div class="container" style="height:100%">
 
-    <div class="row" style="text-align:center">
+    <div class="row" style="text-align:center;">
       <form action="/" method="post">
 	<input style="width:70%" type="text" name="chat_msg">
 	<input type="submit" value="send" style="width:25%">
@@ -53,8 +53,12 @@
 
     <div style="height:10px"></div>
 
-    <div id="chatDiv" style="overflow-y:scroll; height:50%; background-color:#ddd; padding:5px; text-align:left;">{{ .Chats }}</div>
+    <div id="chatDiv" style="overflow-y:scroll; position:absolute; top:100px; bottom:80px; left:20px; right:20px; background-color:#fff; padding:5px; text-align:left;">{{ .Chats }}</div>
 
+</div>
+
+<div class="footer">
+  <div style="float:left;">
     <form enctype="multipart/form-data" action="/upload" method="post">
       <div class="fileUpload btn btn-default">
 	<span>share your picture ...</span>
@@ -62,9 +66,12 @@
       </div>
       <input type="submit" class="btn btn-primary" value="upload" />
     </form>
+  </div>
+  <div style="float:right;">
+    IBM Bluemix - Friend's circle
+  </div>
+  <div style="clear:both;"></div>
 </div>
-
-<div class="footer">IBM Bluemix - Friend's circle</div>
 </body>
 
 <script type="text/javascript">

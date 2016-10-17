@@ -8,12 +8,16 @@ import (
 )
 
 func main() {
-	client := db.NewClient()
-	err := db.SeedDB(client)
+	databaseClient, err := db.NewClient()
 	if err != nil {
-		log.Print("Error seeding DB: " + err.Error())
+		log.Fatal(err)
 	}
 
-	s := server.NewServer(client)
+	err = db.SeedDB(databaseClient)
+	if err != nil {
+		log.Fatal("Error seeding DB: " + err.Error())
+	}
+
+	s := server.NewServer(databaseClient)
 	s.Start()
 }

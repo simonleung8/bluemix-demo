@@ -17,7 +17,7 @@ type template_data struct {
 
 func (s *Server) root_handler(w http.ResponseWriter, req *http.Request) {
 	if req.Method == "POST" {
-		s.chat_handler(w, req)
+		s.send_chat_handler(w, req)
 	} else if req.Method == "GET" {
 		s.template_handler(w, req)
 	}
@@ -40,7 +40,7 @@ func (s *Server) template_handler(w http.ResponseWriter, req *http.Request) {
 	utils.Must(t.Execute(w, d), "Error executing template")
 }
 
-func (s *Server) chat_handler(w http.ResponseWriter, r *http.Request) {
+func (s *Server) send_chat_handler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	if len(r.Form["user_name"]) == 0 || len(r.Form["chat_msg"]) == 0 {
 		log.Println("No username or chat message is sent")

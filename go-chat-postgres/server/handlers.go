@@ -49,6 +49,7 @@ func (s *Server) get_chats_handler(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) send_chat_handler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
+
 	if len(r.Form["user_name"]) == 0 || len(r.Form["chat_msg"]) == 0 {
 		log.Println("No username or chat message is sent")
 	} else {

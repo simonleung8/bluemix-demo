@@ -58,18 +58,19 @@
 </div>
 
 <div class="footer">
-  <div style="float:left;">
-    <form enctype="multipart/form-data" action="/upload" method="post">
-      <div class="fileUpload btn btn-default">
-	<span>share your picture ...</span>
-	<input type="file" name="photo" id="imgUpload" class="upload" />
-      </div>
-      <input type="submit" class="btn btn-primary" value="upload" />
-      <input type="hidden" value={{ .User }} name="user_name" />
-    </form>
-  </div>
-  <div style="float:right;">
-    IBM Bluemix Help Desk
+  <div style="width:100%; height:100%; position: relative;">
+    <div style="position: absolute; left:5px;">
+      <form enctype="multipart/form-data" action="/upload" method="post">
+        <div class="fileUpload btn btn-default btn-sm">
+          <span>share your picture ...</span>
+          <input type="file" name="photo" id="imgUpload" class="upload" />
+        </div>
+        <input type="submit" class="btn btn-primary btn-sm" value="upload" />
+        <input type="hidden" value={{ .User }} name="user_name" />
+      </form>
+    </div>
+
+    <img src='../web/images/ibm-bluemix.png' width='100px' style="position:absolute; right:5px; top:10px;" />
   </div>
   <div style="clear:both;"></div>
 </div>

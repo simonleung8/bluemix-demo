@@ -29,14 +29,16 @@
                 <span class="icon-bar">.</span>
                 <span class="icon-bar">.</span>
             </button>
-            <a class="navbar-brand" href="/logout">> <span style="color:#eee;">{{ .User }}</span> <span style="font-size:.7em; color:#f13131">logout<span></a>
+            <a class="navbar-brand" href="/logout">
+	      <span style="color:#eee;">{{ .User }}</span> <span style="font-size:.7em; color:#f13131">logout<span>
+	    </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Chats</a></li>
-                <li>About</li>
-                <li>Code</li>
+                <li class="active"><a href="/">Help Desk</a></li>
+                <li><a href="/">About this demo</a></li>
+                <li><a href="https://github.com/simonleung8/bluemix-demo/tree/master/go-chat-postgres">Source Code</a></li>
             </ul>
         </div>
     </div>
@@ -47,7 +49,7 @@
     <div class="row" style="text-align:center;">
       <form action="/" method="post">
 	<input style="width:70%" type="text" name="chat_msg">
-	<input type="submit" value="send" style="width:25%">
+	<input type="submit" value="send" class="btn btn-default" style="width:25%">
 	<input type="hidden" value={{ .User }} name="user_name" />
       </form>
     </div>
@@ -81,6 +83,20 @@
   setInterval(function() {
     $("#chatDiv").load("/chats");
   }, 2000);
+
+  // Prevent rubber-banding of the body, but allow for scrolling elements
+  $('body').on('touchmove', function (e) {
+    var searchTerms = '.scroll, .scroll-y, .scroll-x',
+        $target = $(e.target),
+        parents = $target.parents(searchTerms);
+
+    if (parents.length || $target.hasClass(searchTerms)) {
+        // ignore as we want the scroll to happen
+        // (This is where we may need to check if at limit)
+    } else {
+        e.preventDefault();
+    }
+});
 </script>
 
 </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+
+<html>
+
+  <head>
+    <title>Bluemix friend's circle</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="../web/css/bootstrap.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../web/css/bootstrap-theme.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../web/css/main.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../web/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../web/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../web/js/angular.min.js"></script>
+  </head>
+
+<body>
+
+<nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar">.</span>
+                <span class="icon-bar">.</span>
+                <span class="icon-bar">.</span>
+            </button>
+            <a class="navbar-brand" href="#">Friend's circle</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Chats</a></li>
+                <li>About</li>
+                <li>Code</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="height:100%">
+    <div class="page-header">
+        <h1>Bluemix Watson service</h1>
+    </div>
+
+    <div style="padding:5px; text-align:right;">Logged in: {{ .User }} <a href="/logout" style="font-size:.8em">logout</a></div>
+    <div style="overflow-y:scroll; height:50%; background-color:#ddd; padding:5px; text-align:left;">{{ .Chats }}</div>
+
+    <div class="row" style="text-align:center">
+      <form action="/" method="post">
+	<input style="width:70%" type="text" name="chat_msg">
+	<input type="submit" value="send" style="width:25%">
+	<input type="hidden" value={{ .User }} name="user_name" />
+      </form>
+    </div>
+
+      <form enctype="multipart/form-data" action="/upload" method="post">
+        <input type="file" name="photo" />
+        <input type="submit" value="upload" />
+        <input type="hidden" value={{ .User }} name="user_name" />
+      </form>
+</div>
+
+<div class="footer">IBM Bluemix</div>
+</body>
+
+</html>

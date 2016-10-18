@@ -9,6 +9,7 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 50px;
   background:#555;
+	overflow:hidden;
 }
 
 .footer {
@@ -29,6 +30,16 @@ body > .container {
 .container .text-muted {
   margin: 20px 0;
 }
+
+.scroll, .scroll-y, .scroll-x {
+    -webkit-overflow-scrolling: touch;
+}
+.scroll > *, .scroll-y > *, .scroll-x > * {
+    -webkit-transform : translateZ(0);
+}
+.scroll { overflow: auto; }
+.scroll-y { overflow-y: auto; }
+.scroll-x { overflow-x: auto; }
 
 .footer > .container {
   padding-right: 15px;
@@ -55,3 +66,4 @@ code {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+

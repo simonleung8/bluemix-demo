@@ -21,7 +21,13 @@ func GetChats(client *jet.Db) (Chats, error) {
 }
 
 func SendChat(client *jet.Db, user string, chat string) error {
-	return client.Query(fmt.Sprintf(`INSERT INTO chats (name, chat) VALUES ('%s', '%s');`, user, chat)).Run()
+	bs := []byte(chat)
+	var byteStr string
+	for _, b := range bs {
+		byteStr = fmt.Sprintf("%s%d ", byteStr, b)
+	}
+
+	return client.Query(fmt.Sprintf("INSERT INTO chats (name, chat) VALUES ('%s', '%s');", user, byteStr)).Run()
 }
 
 func PostImage(client *jet.Db, user string, imgUrl string) error {

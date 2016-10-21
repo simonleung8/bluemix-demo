@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/eaigner/jet"
+	"github.com/simonleung8/bluemix-demo/go-chat-postgres/utils"
 )
 
 type Chats []struct {
@@ -21,12 +22,7 @@ func GetChats(client *jet.Db) (Chats, error) {
 }
 
 func SendChat(client *jet.Db, user string, chat string) error {
-	bs := []byte(chat)
-	var byteStr string
-	for _, b := range bs {
-		byteStr = fmt.Sprintf("%s%d ", byteStr, b)
-	}
-
+	byteStr := utils.BuildByteString(chat)
 	return client.Query(fmt.Sprintf("INSERT INTO chats (name, chat) VALUES ('%s', '%s');", user, byteStr)).Run()
 }
 
